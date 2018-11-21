@@ -37,7 +37,7 @@
     <div>
       <b>Amigos</b>
     </div>
-    <div class="contact-list-item" *ngFor="let user of users">
+    <div class="contact-list-item" *ngFor="let user of users" (click)="goToConversation(user)">
       <img src="assets/img/logo_live_online.png" class="status">
       <b>{{user.name}}</b>
       <small *ngIf="user.status">{{user.status}}</small>
