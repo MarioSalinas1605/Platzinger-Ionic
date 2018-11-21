@@ -1,0 +1,7 @@
+{
+  "name": "platzinger",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
