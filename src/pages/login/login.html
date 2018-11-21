@@ -7,12 +7,54 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding class="backgroundPlatzinger">
+  <div id="avatarLogin">
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <div class="avatarFrameoffline">
+          <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid">
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list padding>
+    <ion-item>
+      <ion-label fixed>Nick</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Repetir</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Status</ion-label>
+      <ion-select>
+        <ion-option value="online">Conectado</ion-option>
+        <ion-option value="away">Ausente</ion-option>
+        <ion-option value="busy">Ocupado</ion-option>
+        <ion-option value="appear_offline">Desconectado</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <span>Ya tienes cuenta? Click aqui</span>
+    <span>Aun no tienes cuenta? Click aqui</span>
+    <hr>
+    <button ion-button block>Ingresar</button>
+    <button ion-button block>Registrarse</button>
+  </div>
 </ion-content>
