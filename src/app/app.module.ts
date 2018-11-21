@@ -11,6 +11,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPageModule } from '../pages/login/login.module';
 import { ConversationPageModule } from '../pages/conversation/conversation.module';
 import { ProfilePageModule } from '../pages/profile/profile.module';
+import { AboutPageModule } from '../pages/about/about.module';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     IonicModule.forRoot(MyApp),
     LoginPageModule,
     ConversationPageModule,
-    ProfilePageModule
+    ProfilePageModule,
+    AboutPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +37,8 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProvider
   ]
 })
 export class AppModule {}
