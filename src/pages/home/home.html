@@ -37,8 +37,9 @@
     <div>
       <b>Amigos</b>
     </div>
-    <div class="contact-list-item" *ngFor="let user of users" (click)="goToConversation(user)">
-      <img src="assets/img/logo_live_online.png" class="status">
+    <div class="contact-list-item" [ngClass]="{'contact-offline': user.status == 'Offline' || user.status == 'AppearOffline'}"
+    *ngFor="let user of users" (click)="goToConversation(user)" [ngStyle]="{'color': user.status == 'Offline' || user.status == 'AppearOffline' ? 'red' : 'blue'}">
+      <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
       <b>{{user.name}}</b>
       <small *ngIf="user.status">{{user.status}}</small>
     </div>
