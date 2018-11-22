@@ -19,4 +19,10 @@ export class AuthProvider {
   loginWithEmail(email, password) {
     return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
   }
+  getStatus(){
+    return this.firebaseAuth.authState
+  }
+  logOut(){
+    return this.firebaseAuth.auth.signOut()
+  }
 }

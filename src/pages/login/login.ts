@@ -24,7 +24,7 @@ export class LoginPage {
   status: Status;
   nick: string;
   operation: string = 'login';
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider,
     public userService: UserProvider,private toastCtrl: ToastController) {
     this.operation = 'login'
   }
@@ -34,7 +34,7 @@ export class LoginPage {
       alert('Las contraseñas no coinciden');
       return;
     }
-    this.authService.registerWithEmail(this.email, this.password).then((data) => {
+    this.authProvider.registerWithEmail(this.email, this.password).then((data) => {
       const user: User = {
         nick: this.nick,
         email: this.email,
@@ -60,7 +60,7 @@ export class LoginPage {
     });
   }
   loginWithEmail() {
-    this.authService.loginWithEmail(this.email, this.password).then((data) => {
+    this.authProvider.loginWithEmail(this.email, this.password).then((data) => {
       console.log(data);
       let toast = this.toastCtrl.create({
         message: 'Bienvenido',
