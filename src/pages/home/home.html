@@ -40,7 +40,7 @@
     <div class="contact-list-item" [ngClass]="{'contact-offline': user.status == 'Offline' || user.status == 'AppearOffline'}"
     *ngFor="let user of users" (click)="goToConversation(user)" [ngStyle]="{'color': user.status == 'Offline' || user.status == 'AppearOffline' ? 'red' : 'blue'}">
       <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
-      <b>{{user.name}}</b>
+      <b>{{user.nick}}</b>
       <small *ngIf="user.status">{{user.status}}</small>
     </div>
   </div>

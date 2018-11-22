@@ -23,38 +23,42 @@
       </ion-col>
     </ion-row>
   </div>
-  <ion-list padding>
-    <ion-item>
+  <ion-list>
+    <ion-item *ngIf="operation === 'register'">
       <ion-label fixed>Nick</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="nick"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Email</ion-label>
-      <ion-input type="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="operation === 'register'">
       <ion-label fixed>Repetir</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password2"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Status</ion-label>
-      <ion-select>
-        <ion-option value="online">Conectado</ion-option>
-        <ion-option value="away">Ausente</ion-option>
-        <ion-option value="busy">Ocupado</ion-option>
-        <ion-option value="appear_offline">Desconectado</ion-option>
+      <ion-label>Status</ion-label>
+      <ion-select [(ngModel)]="status">
+        <ion-option value="Online">Conectado</ion-option>
+        <ion-option value="Away">Ausente</ion-option>
+        <ion-option value="Busy">Ocupado</ion-option>
+        <ion-option value="AppearOffline">Desconectado</ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Recordarme</ion-label>
+      <ion-checkbox></ion-checkbox>
     </ion-item>
   </ion-list>
   <div padding>
-    <span>Ya tienes cuenta? Click aqui</span>
-    <span>Aun no tienes cuenta? Click aqui</span>
-    <hr>
-    <button ion-button block>Ingresar</button>
-    <button ion-button block>Registrarse</button>
+    <span *ngIf="operation == 'register'">Ya tienes cuenta? <a (click)="operation = 'login'"><b>Click Aquí</b></a></span>
+    <span *ngIf="operation == 'login'">Aun no tienes cuenta? <a (click)="operation = 'register'"><b>Click Aquí</b></a></span>
+    <hr />
+    <button *ngIf="operation == 'login'" ion-button  (click)="loginWithEmail()" block>Ingresar</button>
+    <button *ngIf="operation == 'register'" ion-button (click)="registerWithEmail()" block>Registrarse</button>
   </div>
 </ion-content>

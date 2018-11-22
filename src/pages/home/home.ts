@@ -10,18 +10,14 @@ import { ConversationPage } from '../conversation/conversation';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  users: User[];
-  query: string;
-  yuliana: User = {
-    name: 'Yuliana',
-    age: 26,
-    active: false,
-    status: Status.Online
-  };
-  status: Status
+  users: any =[];
+
   constructor(public navCtrl: NavController, public userService: UserProvider) {
-    this.users = this.userService.get();
-    this.userService.add(this.yuliana);
+    this.userService.getUsers().valueChanges()
+    .subscribe((usersFB)=>{
+      this.users = usersFB
+      console.log(usersFB)
+    })
   }
 
 
