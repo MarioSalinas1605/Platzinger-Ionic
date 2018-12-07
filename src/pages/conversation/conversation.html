@@ -41,13 +41,22 @@
         <ion-icon name="images"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+
+  <div class="message" *ngFor="let m of conversation">
+    <div *ngIf="m.type === 'text'">
+      <b>{{getUserNickById(m.sender)}}</b> dice: {{m.text}}
+    </div>
+    <div *ngIf="m.type === 'zumbido'">
+      <b>{{getUserNickById(m.sender)}}</b> ha enviado un zumbido
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" class="footbarInput" autofocus></ion-input>
+    <ion-input [(ngModel)]="message" type="text" class="footbarInput" (keyup.enter)="sendMessage()" autofocus></ion-input>
     <ion-buttons end>
-      <button ion-button icon-only color="royal">
+      <button ion-button icon-only color="royal" (click)="sendMessage()">
         <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>

@@ -20,6 +20,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthProvider } from '../providers/auth/auth';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClientModule } from '@angular/common/http';
+import { ConversationProvider } from '../providers/conversation/conversation';
+import { Vibration } from '@ionic-native/vibration';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAx5NAJGG4LX61sMXUHcnSzzXOa-FImx5k",
@@ -61,7 +63,9 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
     AuthProvider,
-    Geolocation
+    Geolocation,
+    ConversationProvider,
+    Vibration
   ]
 })
 export class AppModule {}
