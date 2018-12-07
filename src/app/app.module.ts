@@ -18,6 +18,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthProvider } from '../providers/auth/auth';
+import { Geolocation } from '@ionic-native/geolocation';
+import { HttpClientModule } from '@angular/common/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAx5NAJGG4LX61sMXUHcnSzzXOa-FImx5k",
@@ -43,7 +45,8 @@ export const firebaseConfig = {
     LoginPageModule,
     ConversationPageModule,
     ProfilePageModule,
-    AboutPageModule
+    AboutPageModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +60,8 @@ export const firebaseConfig = {
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    AuthProvider
+    AuthProvider,
+    Geolocation
   ]
 })
 export class AppModule {}
