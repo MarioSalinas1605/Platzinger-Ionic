@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'
 import {HttpClient} from "@angular/common/http";
+import { User } from '../../interfaces/user';
+import { AuthProvider } from '../../providers/auth/auth';
+import { UserProvider } from '../../providers/user/user';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProfilePage page.
@@ -16,11 +20,14 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
+  user: User
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private geolocation: Geolocation,
-    public httpClient: HttpClient) {
+    public httpClient: HttpClient,
+    private authProvider: AuthProvider,
+    private userProvider: UserProvider,
+    private alertCtrl: AlertController) {
       this.geolocation.getCurrentPosition().then((resp) => {
       // this.httpClient.get('http://maps.googleapis.com/maps/api/geocode/json?latlng='+resp.coords.latitude+','+resp.coords.longitude+'&sensor=true/false').subscribe((data: any) => {
       //   console.log(data.results[0]);
@@ -34,10 +41,36 @@ export class ProfilePage {
     // }).catch((error) => {
     //   console.log('Error getting location', error);
     // });
+
+    this.authProvider.getStatus().subscribe(
+      (data)=>{
+        this.userProvider.getUserById(data.uid).valueChanges().subscribe(
+          (user:any)=>{
+            this.user = user
+            console.log(this.user)
+          },
+          (error)=>{console.log(error)}
+        )
+      },
+      (error)=>{console.log(error)}
+    )
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  saveData(){
+    this.userProvider.editUser(this.user)
+    .then((data)=>{
+      let alert = this.alertCtrl.create({
+        title: 'Perfecto!',
+        subTitle: 'Se han guardado tus cambios',
+        buttons: ['Ok']
+      });
+      alert.present();
+    })
+    .catch((error)=>{console.log(error)})
   }
 
 }
