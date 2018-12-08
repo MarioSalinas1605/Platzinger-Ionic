@@ -68,29 +68,29 @@ export class ConversationPage {
       console.log(error);
     });
   }
-  // doZumbido() {
-  //   const audio = new Audio('assets/sound/zumbido.m4a');
-  //   audio.play();
-  //   this.shake = true;
-  //   this.vibration.vibrate([200, 80, 150]);
-  //   window.setTimeout(() => {
-  //     this.shake = false;
-  //   }, 800);
-  // }
-  // sendZumbido() {
-  //   const messageObject: any = {
-  //     uid: this.conversationId,
-  //     timestamp: Date.now(),
-  //     sender: this.user.uid,
-  //     receiver: this.friend.uid,
-  //     type: 'zumbido'
-  //   };
-  //   this.conversationService.add(messageObject).then((data) => {
-  //     this.doZumbido();
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
+  doZumbido() {
+    const audio = new Audio('assets/sound/zumbido.m4a');
+    audio.play();
+    this.shake = true;
+    this.vibration.vibrate([200, 80, 150]);
+    window.setTimeout(() => {
+      this.shake = false;
+    }, 800);
+  }
+  sendZumbido() {
+    const messageObject: any = {
+      uid: this.conversationId,
+      timestamp: Date.now(),
+      sender: this.user.uid,
+      receiver: this.friend.uid,
+      type: 'zumbido'
+    };
+    this.conversationService.add(messageObject).then((data) => {
+      this.doZumbido();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
   getConversation() {
     this.conversationService.getById(this.conversationId).valueChanges().subscribe((data) => {
       this.conversation = data;

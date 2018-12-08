@@ -9,13 +9,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="user">
-      <span class="userName">{{user.name}}</span> ({{user.status}})
+    <ion-title *ngIf="friend">
+      <span class="userName">{{friend.nick}}</span> ({{friend.status}})
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="backgroundPlatzinger">
+<ion-content padding class="backgroundPlatzinger" [ngClass]="{'shaker': shake}">
   <div class="bgWhite" margin padding>
     <div class="messageGroup">
       <ng-container>
@@ -27,7 +27,7 @@
   <ion-fab right middle>
     <button ion-fab><ion-icon name="send"></ion-icon></button>
     <ion-fab-list side="top">
-      <button outline ion-fab>
+      <button outline ion-fab (click)="sendZumbido()">
         <ion-label>Enviar Zumbido</ion-label>
         <img src="assets/img/zumbido.png" alt="">
       </button>
