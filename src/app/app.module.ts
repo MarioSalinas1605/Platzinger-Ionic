@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConversationProvider } from '../providers/conversation/conversation';
 import { Vibration } from '@ionic-native/vibration';
 import { RequestProvider } from '../providers/request/request';
+import { CoverPage } from '../pages/cover/cover';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAx5NAJGG4LX61sMXUHcnSzzXOa-FImx5k",
@@ -37,7 +38,8 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    CoverPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    CoverPage
   ],
   providers: [
     StatusBar,

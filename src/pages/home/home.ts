@@ -32,6 +32,7 @@ export class HomePage {
         this.userService.getUserById(session.uid).valueChanges().subscribe(
           (user:User)=>{
             this.user = user
+            console.log(user)
           },
           (error)=>{
             console.log(error)

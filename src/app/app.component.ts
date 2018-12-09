@@ -4,14 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { ConversationPage } from '../pages/conversation/conversation';
 import { ProfilePage } from '../pages/profile/profile';
 import { AboutPage } from '../pages/about/about';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { RequestProvider } from '../providers/request/request';
 import { User } from '../interfaces/user';
+import { CoverPage } from '../pages/cover/cover';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +19,7 @@ import { User } from '../interfaces/user';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = CoverPage;
 
   pages: Array<{title: string, component: any}>;
   user: User
@@ -39,8 +39,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Login', component: LoginPage },
-      { title: 'Conversation', component: ConversationPage },
       { title: 'Profile', component: ProfilePage },
       { title: 'About', component: AboutPage }
     ];
