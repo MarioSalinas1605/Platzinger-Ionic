@@ -44,13 +44,16 @@ export class ProfilePage {
 
     this.authProvider.getStatus().subscribe(
       (data)=>{
-        this.userProvider.getUserById(data.uid).valueChanges().subscribe(
-          (user:any)=>{
-            this.user = user
-            console.log(this.user)
-          },
-          (error)=>{console.log(error)}
-        )
+        if (data) {
+          this.userProvider.getUserById(data.uid).valueChanges().subscribe(
+            (user:any)=>{
+              this.user = user
+              console.log(this.user)
+            },
+            (error)=>{console.log(error)}
+          )
+        }
+
       },
       (error)=>{console.log(error)}
     )

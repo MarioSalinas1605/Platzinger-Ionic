@@ -29,15 +29,18 @@ export class HomePage {
 
     this.authProvider.getStatus().subscribe(
       (session)=>{
-        this.userService.getUserById(session.uid).valueChanges().subscribe(
-          (user:User)=>{
-            this.user = user
-            console.log(user)
-          },
-          (error)=>{
-            console.log(error)
-          }
-        )
+        if (session) {
+          this.userService.getUserById(session.uid).valueChanges().subscribe(
+            (user:User)=>{
+              this.user = user
+              console.log(user)
+            },
+            (error)=>{
+              console.log(error)
+            }
+          )
+        }
+
       },
       (error)=>{
         console.log(error)

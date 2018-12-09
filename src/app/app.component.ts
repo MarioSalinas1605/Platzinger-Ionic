@@ -45,15 +45,18 @@ export class MyApp {
 
     this.authProvider.getStatus().subscribe(
       (session)=>{
-        this.userProvider.getUserById(session.uid).valueChanges().subscribe(
-          (user:User)=>{
-            this.user=user
-            this.getFriendRequests()
-          },
-          (error)=>{
-            console.log(error)
-          }
-        )
+        if (session) {
+          this.userProvider.getUserById(session.uid).valueChanges().subscribe(
+            (user:User)=>{
+              this.user=user
+              this.getFriendRequests()
+            },
+            (error)=>{
+              console.log(error)
+            }
+          )
+        }
+
       },
       (error)=>{
         console.log(error)

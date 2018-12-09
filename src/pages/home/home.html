@@ -20,10 +20,10 @@
           <img src="assets/img/generic_avatar.png" class="avatarImg img-fluid">
         </div>
       </ion-col>
-      <ion-col col-9>
-        Nick <br>
-        <small>Subnick</small><br>
-        <small><b>eduardo@platzi.com</b></small>
+      <ion-col col-9 *ngIf="user">
+        {{user.nick}} <br>
+        <small>{{user.email}}</small><br>
+        <small><b>{{user.status}}</b></small>
       </ion-col>
     </ion-row>
   </ion-grid>
