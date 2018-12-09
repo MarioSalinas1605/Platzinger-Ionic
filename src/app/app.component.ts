@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, App } from 'ionic-angular';
+import { Nav, Platform, App, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,6 +9,9 @@ import { ConversationPage } from '../pages/conversation/conversation';
 import { ProfilePage } from '../pages/profile/profile';
 import { AboutPage } from '../pages/about/about';
 import { AuthProvider } from '../providers/auth/auth';
+import { UserProvider } from '../providers/user/user';
+import { RequestProvider } from '../providers/request/request';
+import { User } from '../interfaces/user';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,9 +22,18 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+  user: User
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    private authProvider: AuthProvider, private app: App) {
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    private authProvider: AuthProvider,
+    private app: App,
+    private userProvider: UserProvider,
+    private requestProvider: RequestProvider,
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private toastController: ToastController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -33,6 +45,22 @@ export class MyApp {
       { title: 'About', component: AboutPage }
     ];
 
+    this.authProvider.getStatus().subscribe(
+      (session)=>{
+        this.userProvider.getUserById(session.uid).valueChanges().subscribe(
+          (user:User)=>{
+            this.user=user
+            this.getFriendRequests()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        )
+      },
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
 
   initializeApp() {
@@ -58,5 +86,16 @@ export class MyApp {
       }
     )
     .catch((error)=>console.log(error))
+  }
+
+  getFriendRequests(){
+    this.requestProvider.getRequestsForEmail(this.user.email).valueChanges().subscribe(
+      (requests: any)=>{
+        console.log(requests)
+      },
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
 }
