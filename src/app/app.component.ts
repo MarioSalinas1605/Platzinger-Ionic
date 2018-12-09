@@ -23,6 +23,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
   user: User
+  requests: any
+  mailsShown: any = []
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -93,10 +95,71 @@ export class MyApp {
     this.requestProvider.getRequestsForEmail(this.user.email).valueChanges().subscribe(
       (requests: any)=>{
         console.log(requests)
+        this.requests = requests
+        this.requests = this.requests.filter((r)=>{
+          return r.status != 'accepted' && r.status != 'rejected'
+        })
+        this.requests.forEach((r)=>{
+          // console.log(r)
+          this.userProvider.getUserById(r.sender).valueChanges().subscribe((data:User)=>{
+            if (this.mailsShown.indexOf(data.email) === -1) {
+                this.mailsShown.push(data.email)
+                console.log(data)
+                this.showRadio(r,data)
+            }
+          })
+
+        })
       },
       (error)=>{
         console.log(error)
       }
     )
+  }
+
+  showRadio(r,sender){
+    let alert = this.alertController.create();
+    alert.setTitle('Solicitud de amistad');
+    alert.setMessage(sender.nick+' te ha enviado una solicitud, deseas aceptar?')
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Claro',
+      value: 'yes',
+      checked: true
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'No',
+      value: 'no'
+    });
+
+    alert.addButton({
+      text: 'Okay',
+      handler: data => {
+        if (data === 'yes') {
+            this.requestProvider.setRequestStatus(r, sender, 'accepted')
+            .then((data)=>{
+              console.log(this.user.uid)
+              console.log(sender.uid)
+              this.userProvider.addFriend(this.user.uid, sender.uid)
+            })
+            .catch((error)=>{
+              console.log(error)
+            })
+        }else{
+          this.requestProvider.setRequestStatus(r, sender, 'rejected')
+          .then((data)=>{
+            //Agregar amigo
+            console.log('Solicitud rechazada')
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+        }
+      }
+    });
+    alert.present();
   }
 }
