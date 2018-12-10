@@ -94,7 +94,7 @@ export class MyApp {
   getFriendRequests(){
     this.requestProvider.getRequestsForEmail(this.user.email).valueChanges().subscribe(
       (requests: any)=>{
-        console.log(requests)
+        // console.log(requests)
         this.requests = requests
         this.requests = this.requests.filter((r)=>{
           return r.status != 'accepted' && r.status != 'rejected'
@@ -104,7 +104,7 @@ export class MyApp {
           this.userProvider.getUserById(r.sender).valueChanges().subscribe((data:User)=>{
             if (this.mailsShown.indexOf(data.email) === -1) {
                 this.mailsShown.push(data.email)
-                console.log(data)
+                // console.log(data)
                 this.showRadio(r,data)
             }
           })
@@ -141,8 +141,6 @@ export class MyApp {
         if (data === 'yes') {
             this.requestProvider.setRequestStatus(r, sender, 'accepted')
             .then((data)=>{
-              console.log(this.user.uid)
-              console.log(sender.uid)
               this.userProvider.addFriend(this.user.uid, sender.uid)
             })
             .catch((error)=>{

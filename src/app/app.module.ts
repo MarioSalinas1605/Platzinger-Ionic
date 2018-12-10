@@ -24,6 +24,7 @@ import { ConversationProvider } from '../providers/conversation/conversation';
 import { Vibration } from '@ionic-native/vibration';
 import { RequestProvider } from '../providers/request/request';
 import { CoverPage } from '../pages/cover/cover';
+import { FriendComponent } from '../components/friend/friend';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAx5NAJGG4LX61sMXUHcnSzzXOa-FImx5k",
@@ -39,7 +40,8 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     ListPage,
-    CoverPage
+    CoverPage,
+    FriendComponent
   ],
   imports: [
     BrowserModule,

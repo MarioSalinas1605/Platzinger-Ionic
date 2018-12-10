@@ -1,0 +1,5 @@
+<div class="contact-list-item" *ngIf="friend" (click)="goToConversation(friend)" >
+  <img src="assets/img/{{getIconByStatus(friend.status)}}" class="status">
+  <b>{{friend.nick}}</b>
+  <small *ngIf="friend.status">{{friend.status}}</small>
+</div>

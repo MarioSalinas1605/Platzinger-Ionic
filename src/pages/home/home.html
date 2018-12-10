@@ -33,15 +33,18 @@
   </div>
 
 
-  <div>
+  <div *ngIf="user && user.friends">
     <div>
-      <b>Amigos</b>
+      <b>Amigos({{user.friends.length}}/{{user.friends.length}})</b>
     </div>
-    <div class="contact-list-item" [ngClass]="{'contact-offline': user.status == 'Offline' || user.status == 'AppearOffline'}"
+    <!-- <div class="contact-list-item" [ngClass]="{'contact-offline': user.status == 'Offline' || user.status == 'AppearOffline'}"
     *ngFor="let user of users" (click)="goToConversation(user)" [ngStyle]="{'color': user.status == 'Offline' || user.status == 'AppearOffline' ? 'red' : 'blue'}">
       <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
       <b>{{user.nick}}</b>
       <small *ngIf="user.status">{{user.status}}</small>
+    </div> -->
+    <div *ngFor="let user of user.friends">
+      <friend [uid]="user"></friend>
     </div>
   </div>
 
